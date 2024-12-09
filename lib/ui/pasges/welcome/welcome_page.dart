@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_maket_app/ui/pasges/address_search/address_search_page.dart';
+import 'package:flutter_maket_app/ui/pasges/login/widgets/login_page.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: SizedBox.expand(
-          //컬럼의 크기를 최대로
+        body: SafeArea(
+      // 안전 영역은 사용할 수 없게 구현 할 수 있음
+      child: SizedBox.expand(
+        //컬럼의 크기를 최대로
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
+              Spacer(),
               Image.asset(
                 'assets/welcome.png',
                 height: 250,
@@ -27,12 +33,39 @@ class WelcomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
+              Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return AddressSearchPage();
+                    },
+                  ));
+                },
                 child: Text('시작하기'),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return LoginPage();
+                    },
+                  ));
+                },
+                child: Container(
+                  height: 50,
+                  color: Colors.transparent,
+                  alignment: Alignment.center,
+                  child: Text(
+                    '이미 계정이 있나요? 로그인',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }
