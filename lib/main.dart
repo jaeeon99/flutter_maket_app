@@ -32,6 +32,54 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          // 앱 전체 내에서 텍스트 필드, 텍스트 폼 필드 테마 지정
+          hintStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          ),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 20,
+          ),
+          border: MaterialStateOutlineInputBorder.resolveWith((states) {
+            //
+            // print(states);
+            // 1. states Set 안에 WidgetState.focused 가 포함이 되어 있을때
+            if (states.contains(WidgetState.focused)) {
+              return OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: Colors.grey,
+                  width: 2,
+                ),
+              );
+            }
+            WidgetState;
+
+            // 2. States Set 안에 WidgetState.error 가 포함이 되어 있을때
+            if (states.contains(WidgetState.error)) {
+              return OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: Colors.red[100]!,
+                  width: 2,
+                ),
+              );
+            }
+            WidgetState;
+
+            // 3. 디폴트 값
+            return OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                color: Colors.grey[300]!,
+                width: 1,
+              ),
+            );
+          }),
+        ),
       ),
       home: WelcomePage(),
     );
